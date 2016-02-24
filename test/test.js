@@ -73,7 +73,7 @@ tape( 'the function evaluates `Γ(x+1) - 1` for `x` between `[2,10]`', function 
 	t.end();
 });
 
-tape( 'the function evaluates `Γ(x+1) - 1` for `x` between `[-2,2]`', function test( t ) {
+tape( 'the function evaluates `Γ(x+1) - 1` for `x` between `(-2,2]`', function test( t ) {
 	var values = linspace( -2, 2, 100 );
 	var delta;
 	var expected;
@@ -91,7 +91,7 @@ tape( 'the function evaluates `Γ(x+1) - 1` for `x` between `[-2,2]`', function 
 	t.end();
 });
 
-tape( 'the function evaluates `Γ(x+1) - 1` for `x` between `[-10,-2]`', function test( t ) {
+tape( 'the function evaluates `Γ(x+1) - 1` for non-integer `x` between `(-10,-2)`', function test( t ) {
 	var values = linspace( -10, -2, 100 );
 	var delta;
 	var expected;
