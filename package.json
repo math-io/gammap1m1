@@ -1,0 +1,85 @@
+{
+  "name": "math-gammap1m1",
+  "version": "0.0.0",
+  "description": "Computes Γ(x+1) - 1.",
+  "author": {
+    "name": "Philipp Burckhardt",
+    "email": "pburckhardt@outlook.com"
+  },
+  "contributors": [
+    {
+      "name": "Philipp Burckhardt",
+      "email": "pburckhardt@outlook.com"
+    }
+  ],
+  "scripts": {
+    "test": "if [ \"${TRAVIS}\" ]; then npm run test-ci; else npm run test-local; fi",
+    "test-local": "tape \"./test/*.js\" | tap-spec",
+    "test-ci": "npm run test-local && xvfb-run npm run test-browsers",
+    "test-cov": "istanbul cover --dir ./reports/coverage --report lcov tape -- \"./test/*.js\"",
+    "test-browsers": "browserify ./test/*.js | testling | tap-spec",
+    "coverage": "istanbul cover --dir ./reports/codecov/coverage --report lcovonly tape -- \"./test/*.js\" && cat ./reports/codecov/coverage/lcov.info | codecov && rm -rf ./reports/codecov"
+  },
+  "main": "./lib",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/math-io/gammap1m1.git"
+  },
+  "keywords": [
+    "compute.io",
+    "compute-io",
+    "compute",
+    "computation",
+    "math.io",
+    "math-io",
+    "math",
+    "mathematics",
+    "special function",
+    "special",
+    "function",
+    "gamma",
+    "factorial",
+    "scalar",
+    "number"
+  ],
+  "bugs": {
+    "url": "https://github.com/math-io/gammap1m1/issues"
+  },
+  "dependencies": {
+    "math-float64-expm1": "^1.0.3",
+    "math-float64-log1p": "^1.0.1",
+    "math-gamma": "^1.0.1",
+    "math-gammaln": "^1.0.0"
+  },
+  "devDependencies": {
+    "browserify": "13.x.x",
+    "codecov": "1.x.x",
+    "compute-incrspace": "^1.0.2",
+    "compute-linspace": "^1.0.0",
+    "istanbul": "^0.4.1",
+    "jshint": "2.x.x",
+    "jshint-stylish": "2.x.x",
+    "tap-spec": "4.x.x",
+    "tape": "4.x.x",
+    "testling": "1.x.x"
+  },
+  "testling": {
+    "files": [
+      "test/*.js"
+    ],
+    "browsers": [
+      "iexplore/6.0..latest",
+      "firefox/3.0..latest",
+      "firefox/nightly",
+      "chrome/4.0..latest",
+      "chrome/canary",
+      "opera/10.0..latest",
+      "opera/next",
+      "safari/4.0..latest",
+      "ipad/6.0..latest",
+      "iphone/6.0..latest",
+      "android-browser/4.2..latest"
+    ]
+  },
+  "license": "MIT"
+}
