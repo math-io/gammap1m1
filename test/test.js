@@ -12,6 +12,21 @@ var NINF = require( 'const-ninf-float64' );
 var gammap1m1 = require( './../lib' );
 
 
+// FIXTURES //
+
+var output1 = JSON.parse( require( './fixtures/output1.json' ).program_message );
+var data1 = output1.x;
+var expected1 = output1.expected;
+
+var output2 = JSON.parse( require( './fixtures/output2.json' ).program_message );
+var data2 = output2.x;
+var expected2 = output2.expected;
+
+var output3 = JSON.parse( require( './fixtures/output3.json' ).program_message );
+var data3 = output3.x;
+var expected3 = output3.expected;
+
+
 // TESTS //
 
 tape( 'main export is a function', function test( t ) {
@@ -56,55 +71,46 @@ tape( 'if provided `-1`, the function returns positive infinity', function test(
 });
 
 tape( 'the function evaluates `Γ(x+1) - 1` for `x` between `[2,10]`', function test( t ) {
-	var values = linspace( 2, 10, 100 );
 	var delta;
-	var expected;
 	var tol;
 	var v;
 	var i;
 
-	for ( i = 0; i < values.length; i++ ) {
-		v = gammap1m1( values[ i ] );
-		expected = gamma( values[ i ] + 1 ) - 1;
-		delta = abs( v - expected );
-		tol = 1e-16 * Math.max( 1, abs( v ), abs( expected ) );
-		t.ok( delta <= tol, 'within tolerance. x: ' + values[ i ] + '. Value: ' + v + '. Expected: ' + expected + '. Tolerance: ' + tol + '.' );
+	for ( i = 0; i < data1.length; i++ ) {
+		v = gammap1m1( data1[ i ] );
+		delta = abs( v - expected1[ i ] );
+		tol = 1e-14 * Math.max( 1, abs( v ), abs( expected1[ i ]) );
+		t.ok( delta <= tol, 'within tolerance. x: ' + data1[ i ] + '. Value: ' + v + '. Expected: ' + expected1[ i ] + '. Tolerance: ' + tol + '.' );
 	}
 	t.end();
 });
 
 tape( 'the function evaluates `Γ(x+1) - 1` for `x` between `(-2,2]`', function test( t ) {
-	var values = linspace( -2, 2, 100 );
 	var delta;
-	var expected;
 	var tol;
 	var v;
 	var i;
 
-	for ( i = 1; i < values.length; i++ ) {
-		v = gammap1m1( values[ i ] );
-		expected = gamma( values[ i ] + 1 ) - 1;
-		delta = abs( v - expected );
-		tol = 1e-12 * Math.max( 1, abs( v ), abs( expected ) );
-		t.ok( delta <= tol, 'within tolerance. x: ' + values[ i ] + '. Value: ' + v + '. Expected: ' + expected + '. Tolerance: ' + tol + '.' );
+	for ( i = 1; i < data2.length; i++ ) {
+		v = gammap1m1( data2[ i ] );
+		delta = abs( v - expected2[ i ] );
+		tol = 1e-14 * Math.max( 1, abs( v ), abs( expected2[ i ] ) );
+		t.ok( delta <= tol, 'within tolerance. x: ' + data2[ i ] + '. Value: ' + v + '. Expected: ' + expected2[ i ] + '. Tolerance: ' + tol + '.' );
 	}
 	t.end();
 });
 
 tape( 'the function evaluates `Γ(x+1) - 1` for non-integer `x` between `(-10,-2)`', function test( t ) {
-	var values = linspace( -10, -2, 100 );
 	var delta;
-	var expected;
 	var tol;
 	var v;
 	var i;
 
-	for ( i = 1; i < values.length - 1; i++ ) {
-		v = gammap1m1( values[ i ] );
-		expected = gamma( values[ i ] + 1 ) - 1;
-		delta = abs( v - expected );
-		tol = 1e-16 * Math.max( 1, abs( v ), abs( expected ) );
-		t.ok( delta <= tol, 'within tolerance. x: ' + values[ i ] + '. Value: ' + v + '. Expected: ' + expected + '. Tolerance: ' + tol + '.' );
+	for ( i = 1; i < data3.length - 1; i++ ) {
+		v = gammap1m1( data3[ i ] );
+		delta = abs( v - expected3[ i ] );
+		tol = 1e-13 * Math.max( 1, abs( v ), abs( expected3[ i ] ) );
+		t.ok( delta <= tol, 'within tolerance. x: ' + data3[ i ] + '. Value: ' + v + '. Expected: ' + expected3[ i ] + '. Tolerance: ' + tol + '.' );
 	}
 	t.end();
 });
